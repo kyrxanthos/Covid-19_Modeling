@@ -20,7 +20,6 @@ figsize = (11,5)
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser() 
-    # parser.add_argument("--models", type=str, help="Choose model to run", required=True)
     parser.add_argument("--models", nargs="+", default=["base"])
 
     args = parser.parse_args()
@@ -34,9 +33,7 @@ if __name__ == "__main__":
         folderpath = 'data/{}/c19s.results.summary.tsv'.format(model)
         df = pandas.read_csv(folderpath, sep = '\t')
         parameters = ['susceptible', 'severe', 'exposed', 'ICU','infectious', 'weeklyFatality']
-        # parameters = ['susceptible', 'infectious', 'cumulative recovered']
 
-    # with plt.style.context('fivethirtyeight'):
         fig, ax = plt.subplots(figsize = figsize)
         x = df['time']
         for i in parameters:
@@ -44,15 +41,12 @@ if __name__ == "__main__":
             y1 = df[i + ' (total) upper bound']
             y2 = df[i + ' (total) lower bound']
             # Choose logscale or not
-            # ax.set_yscale('log')
+            ax.set_yscale('log')
             ax.fill_between(x,y2,y1,interpolate=True, alpha = 0.3)
             ax.plot(x, y, label = str(i))
             ax.xaxis.set_major_locator(MaxNLocator(nbins = 12))
-            # Choose logscale or not
             ax.yaxis.set_label_text('Number of cases (log scale)', fontsize=14)
-            # ax.yaxis.set_label_text('Number of cases', fontsize=14)
             ax.set_facecolor('white')
-            # ax.set_title('Trajectories of all compartments', fontsize=18)
 
 
             # Shrink current axis's height by 10% on the bottom
@@ -84,8 +78,6 @@ if __name__ == "__main__":
             ax.axis('equal')
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-            # ax.set_facecolor('white')
-            # ax.set_title('Summary of outcomes excluding mild cases', fontsize=18)
             plt.tight_layout()
             fig.savefig('plots/{}_piechart.png'.format(model), dpi=200) #save the figure
 
