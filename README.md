@@ -25,9 +25,12 @@ Example: `python plots.py --models lock_5m_simlarge`
 
 ## Sample Results
 
-![](base_final_trajectories_nolog.png)
+![](Plots/base_final_trajectories_nolog.png)
 
-![](plots/lock_5m_simlarge_piechart.png)
+![](Plots/lock_5m_simlarge_trajectories.png)
+
+
+<img src="Plots/school_sd_pe_iso_piechart.png" width="600">
 
 ## Acknowledgements 
 
